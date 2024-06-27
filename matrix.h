@@ -211,14 +211,14 @@ public:
     //
     // method returning a reference to a row in the matrix
     //
-    Row get_row(const rowno &r) const;
+    [[nodiscard]] Row get_row(const rowno &r) const;
 
     //
     // get_col
     //
     // method returning a reference to a column in the matrix
     //
-    Col get_col(const colno &c) const;
+    [[nodiscard]] Col get_col(const colno &c) const;
 
     //
     // posOf
@@ -232,7 +232,7 @@ public:
     //
     // returns true if the element is present in the matrix
     //
-    bool contains(const Complex &elem) const;
+    [[nodiscard]] bool contains(const Complex &elem) const;
 
     //
     // order
@@ -253,14 +253,14 @@ public:
     //
     // returning the number of rows
     //
-    int col_count() const;
+    [[nodiscard]] int col_count() const;
 
     //
     // size
     //
     // returning the number of rows
     //
-    int size() const;
+    [[nodiscard]] int size() const;
 
     /// Advanced Matrix Operations
 
