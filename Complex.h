@@ -105,28 +105,28 @@ public:
     //
     // get the real part of the complex number
     //
-    [[nodiscard]] double re() const;
+    friend double re(const Complex &z);
 
     //
     // im
     //
     // get the imaginary part of the complex number
     //
-    [[nodiscard]] double im() const;
+    friend double im(const Complex &z);
 
     //
     // mod
     //
     // get the modulus/magnitude of the complex number
     //
-    [[nodiscard]] double mod() const;
+    friend double mod(const Complex &z);
 
     //
     // arg
     //
     // get the argument of the complex number
     //
-    [[nodiscard]] double arg() const;
+    friend double arg(const Complex &z);
 
     /* MUTATORS: */
 
@@ -143,7 +143,7 @@ public:
     // set the imaginary part of the complex number
     //
     void set_im(double y2);
-    
+
     //
     // set_mod
     //
@@ -157,8 +157,8 @@ public:
     // set the argument of the complex number
     //
     void set_arg(double A2);
-    
-    // 
+
+    //
     // set
     //
     // set both the rectangular coordinates or the polar coordinates
@@ -192,7 +192,14 @@ public:
     friend void operator+=(Complex &z1, const Complex &z2);
 
     //
-    // operator-
+    // unary operator-
+    //
+    // negate a complex number
+    //
+    friend Complex operator-(const Complex &z);
+
+    //
+    // binary operator-
     //
     // subtract one complex number from another
     //
@@ -214,7 +221,7 @@ public:
     friend void operator*=(Complex &z1, const Complex &z2);
 
     //
-    // operator/ and operator/=
+    // operator/
     //
     // divide this by another Complex number
     //
@@ -223,13 +230,6 @@ public:
     // operator/=
     //
     friend void operator/=(Complex &z1, const Complex &z2);
-
-    //
-    // recip
-    //
-    // return the reciprocal of the complex number
-    //
-    [[nodiscard]] Complex reciprocal() const;
 
     //
     // dist
@@ -257,29 +257,29 @@ public:
     //
     // return the principal argument i.e. in the range (-pi, pi]
     //
-    [[nodiscard]] double principal_arg() const;
+    friend double principal_arg(const Complex &z);
 
     //
     // conjugate
     //
     // return the conjugate of the Complex number
     //
-    [[nodiscard]] Complex conjugate() const;
+    friend Complex conjugate(const Complex &z);
 
     //
     // is_real
     //
     // return whether the Complex number is real
     //
-    [[nodiscard]] bool is_real() const;
+    friend bool is_real(const Complex &z);
 
     //
     // cross_ratio
     //
     // return the cross ratio of four Complex numbers
     //
-    friend Complex cross_ratio(const Complex &z1, const Complex &z2, const Complex &z3, const Complex &z4);
-    
+    friend Complex cross_ratio(const Complex &z, const Complex &z1, const Complex &z2, const Complex &z3);
+
     //
     // rot
     //
@@ -288,7 +288,111 @@ public:
     // (z1 - z2) and (z3 - z2) are known and so is the angle between them
     //
     friend Complex rotate(const Complex &z, const Complex &about, const double &through,
-                       const double &fin_len, const bool &anticlockwise);
+                          const double &fin_len, const bool &anticlockwise);
+
+    //
+    // exp
+    //
+    // Complex exponential function defined as
+    // exp(z = x + iy) = (e^x)(cosy + isiny) = (e^x)(e^iy)
+    //
+    friend Complex exp(const Complex &z);
+
+    //
+    // sin
+    //
+    // Complex sine function defined as
+    // sin(z) = (1/2i)(exp(iz) - exp(-iz))
+    //
+    friend Complex sin(const Complex &z);
+
+    //
+    // cos
+    //
+    // Complex cosine function defined as
+    // cos(z) = (1/2)(exp(iz) + exp(-iz))
+    //
+    friend Complex cos(const Complex &z);
+
+    //
+    // tan
+    //
+    // Complex tangent function defined as
+    // tan(z) = sinz/cosz
+    //
+    friend Complex tan(const Complex &z);
+
+    //
+    // cosec
+    //
+    // Complex cosecant function defined as
+    // cosec(z) = 1/sinz
+    //
+    friend Complex cosec(const Complex &z);
+
+    //
+    // sec
+    //
+    // Complex secant function defined as
+    // sec(z) = 1/cosz
+    //
+    friend Complex sec(const Complex &z);
+
+    //
+    // cot
+    //
+    // Complex cotangent function defined as
+    // cot(z) = cosz/sinz
+    //
+    friend Complex cot(const Complex &z);
+
+    //
+    // sinh
+    //
+    // Complex hyperbolic sine function defined as
+    // sinh(z) = (1/2)(exp(z) - exp(-z))
+    //
+    friend Complex sinh(const Complex &z);
+
+    //
+    // cosh
+    //
+    // Complex hyperbolic cosine function defined as
+    // cosh(z) = (1/2)(exp(z) + exp(-z))
+    //
+    friend Complex cosh(const Complex &z);
+
+    //
+    // tanh
+    //
+    // Complex hyperbolic tangent function defined as
+    // tanh(z) = sinhz/coshz
+    //
+    friend Complex tanh(const Complex &z);
+
+    //
+    // cosech
+    //
+    // Complex hyperbolic cosecant function defined as
+    // cosech(z) = 1/sinhz
+    //
+    friend Complex cosech(const Complex &z);
+
+    //
+    // sech
+    //
+    // Complex hyperbolic secant function defined as
+    // sech(z) = 1/coshz
+    //
+    friend Complex sech(const Complex &z);
+
+    //
+    // coth
+    //
+    // Complex hyperbolic cotangent function defined as
+    // coth(z) = coshz/sinhz
+    //
+    friend Complex coth(const Complex &z);
 
     //
     // print
@@ -665,20 +769,20 @@ Complex cis(double d) {
     return z;
 }
 
-double Complex::re() const {
-    return x;
+double re(const Complex &z) {
+    return z.x;
 }
 
-double Complex::im() const {
-    return y;
+double im(const Complex &z) {
+    return z.y;
 }
 
-double Complex::mod() const {
-    return r;
+double mod(const Complex &z) {
+    return z.r;
 }
 
-double Complex::arg() const {
-    return A;
+double arg(const Complex &z) {
+    return z.A;
 }
 
 void Complex::set_re(double x2) {
@@ -736,6 +840,11 @@ void operator+=(Complex &z1, const Complex &z2) {
     z1 = z1 + z2;
 }
 
+Complex operator-(const Complex &z) {
+    Complex neg(-z.x, -z.y);
+    return neg;
+}
+
 Complex operator-(const Complex &z1, const Complex &z2) {
     Complex diff(z1.x - z2.x, z1.y - z2.y);
     return diff;
@@ -765,10 +874,6 @@ void operator/=(Complex &z1, const Complex &z2) {
     z1 = z1 / z2;
 }
 
-Complex Complex::reciprocal() const {
-    return 1 / *this;
-}
-
 double dist(const Complex &z1, const Complex &z2) {
     return sqrt(pow(z1.x - z2.x, 2) + pow(z1.y - z2.y, 2));
 }
@@ -794,21 +899,87 @@ Complex pow(const Complex &z1, const Complex &z2) {
     }
 }
 
-double Complex::principal_arg() const {
-    return theta();
+double principal_arg(const Complex &z) {
+    return z.theta();
 }
 
-Complex Complex::conjugate() const {
-    Complex bar(x, -y);
+Complex conjugate(const Complex &z) {
+    Complex bar(z.x, -z.y);
     return bar;
 }
 
-bool Complex::is_real() const {
-    return y == 0;
+bool is_real(const Complex &z) {
+    return z.y == 0;
 }
 
 Complex cross_ratio(const Complex &z, const Complex &z1, const Complex &z2, const Complex &z3) {
     return ((z - z1) / (z - z3)) / ((z2 - z1) / (z2 - z3));
+}
+
+Complex rotate(const Complex &z, const Complex &about, const double &through,
+            const double &fin_len, const bool &anticlockwise = true) {
+    Complex vec1 = z - about;
+    Complex offset;
+    if (anticlockwise) {
+        offset.set(fin_len / vec1.r, through, false);
+    } else {
+        offset.set(fin_len / vec1.r, -through, false);
+    }
+    return about + (vec1 * offset);
+}
+
+Complex exp(const Complex &z) {
+    return exp(z.x) * cis(z.y);
+}
+
+Complex sin(const Complex &z) {
+    Complex i = "i";
+    return (1 / (2 * i)) * (exp(i * z) - exp(-i * z));
+}
+
+Complex cos(const Complex &z) {
+    Complex i = "i";
+    return (exp(i * z) + exp(-i * z)) / 2;
+}
+
+Complex tan(const Complex &z) {
+    return sin(z) / cos(z);
+}
+
+Complex cosec(const Complex &z) {
+    return 1 / sin(z);
+}
+
+Complex sec(const Complex &z) {
+    return 1 / cos(z);
+}
+
+Complex cot(const Complex &z) {
+    return cos(z) / sin(z);
+}
+
+Complex sinh(const Complex &z) {
+    return (exp(z) - exp(-z)) / 2;
+}
+
+Complex cosh(const Complex &z) {
+    return (exp(z) + exp(-z)) / 2;
+}
+
+Complex tanh(const Complex &z) {
+    return sinh(z) / cosh(z);
+}
+
+Complex cosech(const Complex &z) {
+    return 1 / sinh(z);
+}
+
+Complex sech(const Complex &z) {
+    return 1 / cosh(z);
+}
+
+Complex coth(const Complex &z) {
+    return cosh(z) / sinh(z);
 }
 
 void Complex::print(ostream &out, const bool &cis) const {
@@ -867,18 +1038,6 @@ void Complex::print(ostream &out, const bool &cis) const {
     }
 }
 
-Complex rotate(const Complex &z, const Complex &about, const double &through,
-            const double &fin_len, const bool &anticlockwise = true) {
-    Complex vec1 = z - about;
-    Complex offset;
-    if (anticlockwise) {
-        offset.set(fin_len / vec1.r, through, false);
-    } else {
-        offset.set(fin_len / vec1.r, -through, false);
-    }
-    return about + (vec1 * offset);
-}
-
 ostream &operator<<(ostream &out, const Complex &z1) {
     switch(z1.quadrant())
     {
@@ -914,5 +1073,3 @@ istream &operator>>(istream &in, Complex &z1) {
     z1.extract_from_string(num);
     return in;
 }
-
-
