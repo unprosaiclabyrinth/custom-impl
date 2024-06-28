@@ -1024,13 +1024,12 @@ Matrix Matrix::inverse()
     return adjoint() / D;
 }
 
-Matrix Matrix::conjugate()
-{
+Matrix Matrix::conjugate() {
     matrix bar;
     for (rowno r = 0; r < nrows; ++r) {
         Row currbar;
         for(colno c = 0; c < ncols; ++c) {
-            currbar.push_back(at(r, c).conjugate());
+            currbar.push_back(::conjugate(at(r, c)));
         }
         bar.push_back(currbar);
     }
